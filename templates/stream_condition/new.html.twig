@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New StreamCondition{% endblock %}
+
+{% block body %}
+    <h1>Create new StreamCondition</h1>
+
+    {{ include('stream_condition/_form.html.twig') }}
+
+    <a href="{{ path('stream_condition_index') }}">back to list</a>
+{% endblock %}

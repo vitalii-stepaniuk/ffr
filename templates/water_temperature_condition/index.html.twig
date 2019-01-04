@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WaterTemperatureCondition index{% endblock %}
+
+{% block body %}
+    <h1>WaterTemperatureCondition index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for water_temperature_condition in water_temperature_conditions %}
+            <tr>
+                <td>{{ water_temperature_condition.id }}</td>
+                <td>{{ water_temperature_condition.title }}</td>
+                <td>
+                    <a href="{{ path('water_temperature_condition_show', {'id': water_temperature_condition.id}) }}">show</a>
+                    <a href="{{ path('water_temperature_condition_edit', {'id': water_temperature_condition.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('water_temperature_condition_new') }}">Create new</a>
+{% endblock %}
