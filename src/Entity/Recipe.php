@@ -28,9 +28,15 @@ class Recipe
      */
     private $condition_stream;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\WaterTemperatureCondition", inversedBy="recipes")
+     */
+    private $condition_water_temperature;
+
     public function __construct()
     {
         $this->condition_stream = new ArrayCollection();
+        $this->condition_water_temperature = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,6 +77,32 @@ class Recipe
     {
         if ($this->condition_stream->contains($conditionStream)) {
             $this->condition_stream->removeElement($conditionStream);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|WaterTemperatureCondition[]
+     */
+    public function getConditionWaterTemperature(): Collection
+    {
+        return $this->condition_water_temperature;
+    }
+
+    public function addConditionWaterTemperature(WaterTemperatureCondition $conditionWaterTemperature): self
+    {
+        if (!$this->condition_water_temperature->contains($conditionWaterTemperature)) {
+            $this->condition_water_temperature[] = $conditionWaterTemperature;
+        }
+
+        return $this;
+    }
+
+    public function removeConditionWaterTemperature(WaterTemperatureCondition $conditionWaterTemperature): self
+    {
+        if ($this->condition_water_temperature->contains($conditionWaterTemperature)) {
+            $this->condition_water_temperature->removeElement($conditionWaterTemperature);
         }
 
         return $this;
