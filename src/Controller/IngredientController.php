@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Ingredient;
-use App\Form\IngredientType;
+use App\Form\Ingredient1Type;
 use App\Repository\IngredientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +29,7 @@ class IngredientController extends AbstractController
     public function new(Request $request): Response
     {
         $ingredient = new Ingredient();
-        $form = $this->createForm(IngredientType::class, $ingredient);
+        $form = $this->createForm(Ingredient1Type::class, $ingredient);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +59,7 @@ class IngredientController extends AbstractController
      */
     public function edit(Request $request, Ingredient $ingredient): Response
     {
-        $form = $this->createForm(IngredientType::class, $ingredient);
+        $form = $this->createForm(Ingredient1Type::class, $ingredient);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

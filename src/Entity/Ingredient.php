@@ -21,6 +21,12 @@ class Ingredient
      */
     private $title;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\TypeOfIngredient", inversedBy="ingredients")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ingredient_type;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -34,6 +40,18 @@ class Ingredient
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getIngredientType(): ?TypeOfIngredient
+    {
+        return $this->ingredient_type;
+    }
+
+    public function setIngredientType(?TypeOfIngredient $ingredient_type): self
+    {
+        $this->ingredient_type = $ingredient_type;
 
         return $this;
     }
