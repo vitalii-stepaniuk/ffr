@@ -32,6 +32,12 @@ class RecipeItem
      */
     private $weight;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Ingredient", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ingredient;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +75,18 @@ class RecipeItem
     public function setWeight(int $weight): self
     {
         $this->weight = $weight;
+
+        return $this;
+    }
+
+    public function getIngredient(): ?Ingredient
+    {
+        return $this->ingredient;
+    }
+
+    public function setIngredient(Ingredient $ingredient): self
+    {
+        $this->ingredient = $ingredient;
 
         return $this;
     }

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\RecipeItem;
-use App\Form\RecipeItem1Type;
+use App\Form\RecipeItem2Type;
 use App\Repository\RecipeItemRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +29,7 @@ class RecipeItemController extends AbstractController
     public function new(Request $request): Response
     {
         $recipeItem = new RecipeItem();
-        $form = $this->createForm(RecipeItem1Type::class, $recipeItem);
+        $form = $this->createForm(RecipeItem2Type::class, $recipeItem);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +59,7 @@ class RecipeItemController extends AbstractController
      */
     public function edit(Request $request, RecipeItem $recipeItem): Response
     {
-        $form = $this->createForm(RecipeItem1Type::class, $recipeItem);
+        $form = $this->createForm(RecipeItem2Type::class, $recipeItem);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
