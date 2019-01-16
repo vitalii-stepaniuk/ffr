@@ -38,6 +38,11 @@ class RecipeItem
      */
     private $ingredient;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Unit", inversedBy="recipeItems")
+     */
+    private $unit;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,18 @@ class RecipeItem
     public function setIngredient(Ingredient $ingredient): self
     {
         $this->ingredient = $ingredient;
+
+        return $this;
+    }
+
+    public function getUnit(): ?Unit
+    {
+        return $this->unit;
+    }
+
+    public function setUnit(?Unit $unit): self
+    {
+        $this->unit = $unit;
 
         return $this;
     }
