@@ -15,6 +15,7 @@ class Recipe1Type extends AbstractType
             ->add('title')
             ->add('condition_stream')
             ->add('condition_water_temperature')
+            ->add('recipe_item_2')
         ;
     }
 

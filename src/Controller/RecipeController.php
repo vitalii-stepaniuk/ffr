@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Recipe;
-use App\Form\Recipe1Type;
+use App\Form\Recipe3Type;
 use App\Repository\RecipeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +20,9 @@ class RecipeController extends AbstractController
      */
     public function index(RecipeRepository $recipeRepository): Response
     {
-        return $this->render('recipe/index.html.twig', ['recipes' => $recipeRepository->findAll()]);
+        return $this->render('recipe/index.html.twig', [
+            'recipes' => $recipeRepository->findAll(),
+        ]);
     }
 
     /**
@@ -29,7 +31,7 @@ class RecipeController extends AbstractController
     public function new(Request $request): Response
     {
         $recipe = new Recipe();
-        $form = $this->createForm(Recipe1Type::class, $recipe);
+        $form = $this->createForm(Recipe3Type::class, $recipe);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -51,7 +53,9 @@ class RecipeController extends AbstractController
      */
     public function show(Recipe $recipe): Response
     {
-        return $this->render('recipe/show.html.twig', ['recipe' => $recipe]);
+        return $this->render('recipe/show.html.twig', [
+            'recipe' => $recipe,
+        ]);
     }
 
     /**
@@ -59,13 +63,15 @@ class RecipeController extends AbstractController
      */
     public function edit(Request $request, Recipe $recipe): Response
     {
-        $form = $this->createForm(Recipe1Type::class, $recipe);
+        $form = $this->createForm(Recipe3Type::class, $recipe);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('recipe_index', ['id' => $recipe->getId()]);
+            return $this->redirectToRoute('recipe_index', [
+                'id' => $recipe->getId(),
+            ]);
         }
 
         return $this->render('recipe/edit.html.twig', [

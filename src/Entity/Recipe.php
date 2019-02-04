@@ -33,10 +33,16 @@ class Recipe
      */
     private $condition_water_temperature;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RecipeItem", mappedBy="recipe")
+     */
+    private $items;
+
     public function __construct()
     {
         $this->condition_stream = new ArrayCollection();
         $this->condition_water_temperature = new ArrayCollection();
+        $this->items = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -110,5 +116,36 @@ class Recipe
 
     public function __toString() {
         return $this->title;
+    }
+
+    /**
+     * @return Collection|RecipeItem[]
+     */
+    public function getItems(): Collection
+    {
+        return $this->items;
+    }
+
+    public function addItem(RecipeItem $item): self
+    {
+        if (!$this->items->contains($item)) {
+            $this->items[] = $item;
+            $item->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeItem(RecipeItem $item): self
+    {
+        if ($this->items->contains($item)) {
+            $this->items->removeElement($item);
+            // set the owning side to null (unless already changed)
+            if ($item->getRecipe() === $this) {
+                $item->setRecipe(null);
+            }
+        }
+
+        return $this;
     }
 }

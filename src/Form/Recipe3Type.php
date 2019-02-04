@@ -7,16 +7,15 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RecipeType extends AbstractType
+class Recipe3Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('title')
-            ->add('item', RecipeItem::class, [
-                'class' => App\Entity\RecipeItem,
-                'placeholder' => 'Whatever',
-            ])
+            ->add('condition_stream')
+            ->add('condition_water_temperature')
+            ->add('items')
         ;
     }
 

@@ -43,6 +43,11 @@ class RecipeItem
      */
     private $unit;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Recipe", inversedBy="items")
+     */
+    private $recipe;
+
     public function getId(): ?int
     {
         return $this->id;
