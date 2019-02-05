@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Recipe;
+use App\Form\RecipeItemType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,8 +16,11 @@ class Recipe3Type extends AbstractType
             ->add('title')
             ->add('condition_stream')
             ->add('condition_water_temperature')
-            ->add('items')
-        ;
+            ->add('items', RecipeItemType::class, [
+                'data_class' => null,
+                'label' => 'The recipe consists of',
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
