@@ -1,4 +1,6 @@
 {{ form_start(form) }}
+    {{ form_label(form.title, 'This is a title', {'label_attr': {'class': 'label'}}) }}
+    {{ form_widget(form.title, {'attr': {'class': 'input'}} ) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn button">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
