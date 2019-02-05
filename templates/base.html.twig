@@ -13,17 +13,18 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   </head>
   <body>
-  <section class="section">
-    <div class="container">
+  <div class="container is-fluid">
+    <nav class="level">
       <h1 class="title">
         {% block primary_title %}<a href="{{ path('front_page') }}">Fish Food Recipes</a>{% endblock %}
       </h1>
       <p class="subtitle">
         {% block secondary_title %}Feed fish to <strong>catch it</strong>!{% endblock %}
       </p>
-    </div>
-  </section>
+    </nav>
+  
   {% block body %}{% endblock %}
+  </div>
   {% block javascripts %}{% endblock %}
   
   </body>
