@@ -31,6 +31,11 @@ class Brand
      */
     private $url;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $short_description;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +73,18 @@ class Brand
     public function setUrl(?string $url): self
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function getShortDescription(): ?string
+    {
+        return $this->short_description;
+    }
+
+    public function setShortDescription(string $short_description): self
+    {
+        $this->short_description = $short_description;
 
         return $this;
     }
