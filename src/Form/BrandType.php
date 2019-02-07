@@ -15,6 +15,7 @@ class BrandType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('url')
+            ->add('short_description')
         ;
     }
 
