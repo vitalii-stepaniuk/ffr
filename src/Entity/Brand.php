@@ -36,11 +36,6 @@ class Brand
      */
     private $short_description;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $image;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -90,18 +85,6 @@ class Brand
     public function setShortDescription(string $short_description): self
     {
         $this->short_description = $short_description;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
 
         return $this;
     }
