@@ -6,22 +6,38 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Brand;
 use App\Entity\WaterTemperatureCondition;
+use App\Entity\TypeOfIngredient;
+use App\Entity\StreamCondition;
+use App\Entity\Unit;
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        // $product = new Product();
-        // $manager->persist($product);
+        foreach ($this->getUnits() as $title => $name) {
+            $unit = new Unit();
+            $unit->setTitle($title);
+            $manager->persist($unit);
+        }
+
+        foreach ($this->getStreamConditions() as $title) {
+            $stream = new StreamCondition();
+            $stream->setTitle($title);
+            $manager->persist($stream);
+        }
+        
+        foreach ($this->getIngredientTypes() as $title) {
+            $type = new TypeOfIngredient();
+            $type->setTitle($title);
+            $manager->persist($type);
+        }
+
         $waterConditions = $this->getWaterTemperatureConditions();
         foreach ($waterConditions as $title) {
             $condition = new WaterTemperatureCondition();
             $condition->setTitle($title);
             $manager->persist($condition);
         }
-
-
-
 
         $brands = $this->getBrands();
 
@@ -34,6 +50,37 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    private function getUnits()
+    {
+        return [
+            'kg' => 'kilogram',
+            'g' => 'gram',
+            'l' => 'liter',
+            'pack' => 'pack',
+            'item' => 'item',
+        ];
+    }
+
+    private function getStreamConditions()
+    {
+        return [
+            'Stream Strong',
+            'Stream Average',
+            'No Steam',
+        ];
+    }
+
+    private function getIngredientTypes()
+    {
+        return [
+            'Groundbait',
+            'Ground',
+            'Water',
+            'Liquid',
+            'Salt'
+        ];
     }
 
     private function getBrands()
