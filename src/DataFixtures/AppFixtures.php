@@ -10,11 +10,27 @@ use App\Entity\TypeOfIngredient;
 use App\Entity\StreamCondition;
 use App\Entity\Unit;
 use App\Entity\Fish;
+use App\Entity\Ingredient;
+use App\Repository\TypeOfIngredientRepository;
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+        foreach ($this->getIngredients() as $title => $ingredientType) {
+            $ingredient = new Ingredient();
+            $ingredient->setTitle($title);
+
+
+            // @TODO: load entity by certain field\column
+            $repo = new TypeOfIngredientRepository();
+            $typeOfIngredient = $repo->findOneBy(['title' => $ingredientType]);
+            var_dump($typeOfIngredient);
+
+
+            $manager->persist($ingredient);
+        }
+
         foreach ($this->getFish() as $title) {
             $fish = new Fish();
             $fish->setTitle($title);
@@ -57,6 +73,16 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    private function getIngredients()
+    {
+        return [
+            'Big fish' => 'Groundbait',
+            'Yellow bream' => 'Groundbait',
+            'Spice Carassio' => 'Liquid',
+            'Carp Corn' => 'Liquid',
+        ];
     }
 
     private function getFish()
