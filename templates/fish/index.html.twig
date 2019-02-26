@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fish index{% endblock %}
+
+{% block body %}
+    <h1>Fish index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fish in fish %}
+            <tr>
+                <td>{{ fish.id }}</td>
+                <td>{{ fish.title }}</td>
+                <td>{{ fish.description }}</td>
+                <td>
+                    <a href="{{ path('fish_show', {'id': fish.id}) }}">show</a>
+                    <a href="{{ path('fish_edit', {'id': fish.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('fish_new') }}">Create new</a>
+{% endblock %}

@@ -9,11 +9,18 @@ use App\Entity\WaterTemperatureCondition;
 use App\Entity\TypeOfIngredient;
 use App\Entity\StreamCondition;
 use App\Entity\Unit;
+use App\Entity\Fish;
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+        foreach ($this->getFish() as $title) {
+            $fish = new Fish();
+            $fish->setTitle($title);
+            $manager->persist($fish);
+        }
+
         foreach ($this->getUnits() as $title => $name) {
             $unit = new Unit();
             $unit->setTitle($title);
@@ -50,6 +57,17 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    private function getFish()
+    {
+        return [
+            'Carasio',
+            'Carp',
+            'Roach',
+            'Bream',
+            'Skimmer',
+        ];
     }
 
     private function getUnits()
