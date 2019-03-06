@@ -47,4 +47,9 @@ class TypeOfIngredientRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findAllIndexed() {
+        $qb = $this->createQueryBuilder('t');
+        $query = $qb->indexBy('t', 't.title')->getQuery();
+        return $query->getResult();
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Form\Ingredient1Type;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Brand;
@@ -17,17 +18,25 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+        // @TODO: recipes
+        // @TODO: recipe items
+
+
+
+
+        foreach ($this->getIngredientTypes() as $title) {
+            $type = new TypeOfIngredient();
+            $type->setTitle($title);
+            $manager->persist($type);
+        }
+        $manager->flush();
+
+        $toiRepository = $manager->getRepository(TypeOfIngredient::class);
+        $tois = $toiRepository->findAllIndexed();
         foreach ($this->getIngredients() as $title => $ingredientType) {
             $ingredient = new Ingredient();
             $ingredient->setTitle($title);
-
-
-            // @TODO: load entity by certain field\column
-            $repo = new TypeOfIngredientRepository();
-            $typeOfIngredient = $repo->findOneBy(['title' => $ingredientType]);
-            var_dump($typeOfIngredient);
-
-
+            $ingredient->setIngredientType($tois[$ingredientType]);
             $manager->persist($ingredient);
         }
 
@@ -48,12 +57,6 @@ class AppFixtures extends Fixture
             $stream->setTitle($title);
             $manager->persist($stream);
         }
-        
-        foreach ($this->getIngredientTypes() as $title) {
-            $type = new TypeOfIngredient();
-            $type->setTitle($title);
-            $manager->persist($type);
-        }
 
         $waterConditions = $this->getWaterTemperatureConditions();
         foreach ($waterConditions as $title) {
@@ -71,7 +74,6 @@ class AppFixtures extends Fixture
             $brand->setUrl($brandData['url']);
             $manager->persist($brand);    
         }
-
         $manager->flush();
     }
 
