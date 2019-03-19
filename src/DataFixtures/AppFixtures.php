@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Recipe;
 use App\Form\Ingredient1Type;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -18,7 +19,8 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        // @TODO: recipes
+
+
         // @TODO: recipe items
 
 
@@ -75,6 +77,23 @@ class AppFixtures extends Fixture
             $manager->persist($brand);    
         }
         $manager->flush();
+
+        // @TODO: recipes
+        foreach ($this->getRecipes() as $title) {
+            $recipe = new Recipe();
+            $recipe->setTitle($title);
+            $manager->persist($recipe);
+        }
+        $manager->flush();
+    }
+
+    private function getRecipes()
+    {
+        return [
+            'for big fish',
+            'for small fish',
+        ];
+
     }
 
     private function getIngredients()
