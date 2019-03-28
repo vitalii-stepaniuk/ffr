@@ -13,18 +13,17 @@ use App\Entity\StreamCondition;
 use App\Entity\Unit;
 use App\Entity\Fish;
 use App\Entity\Ingredient;
-use App\Repository\TypeOfIngredientRepository;
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-
-
-        // @TODO: recipe items
-
-
-
+        foreach ($this->getRecipes() as $title) {
+            $recipe = new Recipe();
+            $recipe->setTitle($title);
+            $manager->persist($recipe);
+        }
+        $manager->flush();
 
         foreach ($this->getIngredientTypes() as $title) {
             $type = new TypeOfIngredient();
@@ -78,13 +77,19 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
-        // @TODO: recipes
-        foreach ($this->getRecipes() as $title) {
-            $recipe = new Recipe();
-            $recipe->setTitle($title);
-            $manager->persist($recipe);
+        // @TODO: recipe items
+        $recipeRepository = $manager->getRepository(Recipe::class);
+        $recipes = $recipeRepository->findAll();
+        $recipeArray = [];
+        foreach ($recipes as $item) {
+            $id = $item->getId();
+            $title = $item->getTitle();
+            $recipeArray[$id] = $title;
         }
-        $manager->flush();
+        // So, we already got an array of recipes (already existing/added into the database)
+        // Next step is to create a few recipe items.
+
+
     }
 
     private function getRecipes()
