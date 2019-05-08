@@ -38,6 +38,12 @@ class Recipe
      */
     private $items;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="recipes")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $author;
+
     public function __construct()
     {
         $this->condition_stream = new ArrayCollection();
@@ -145,6 +151,18 @@ class Recipe
                 $item->setRecipe(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

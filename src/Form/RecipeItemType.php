@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\RecipeItem;
 use App\Entity\Ingredient;
+use App\Entity\Unit;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,6 +17,9 @@ class RecipeItemType extends AbstractType
         $builder
             ->add('ingredient', EntityType::class, [
                 'class' => Ingredient::class,
+            ])
+            ->add('unit', EntityType::class, [
+                'class' => Unit::class,
             ])
             ->add('quantity');
     }
