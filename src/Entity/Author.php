@@ -28,9 +28,15 @@ class Author
      */
     private $recipes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Brand", inversedBy="authors")
+     */
+    private $brands;
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
+        $this->brands = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -76,6 +82,32 @@ class Author
             if ($recipe->getAuthor() === $this) {
                 $recipe->setAuthor(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Brand[]
+     */
+    public function getBrands(): Collection
+    {
+        return $this->brands;
+    }
+
+    public function addBrand(Brand $brand): self
+    {
+        if (!$this->brands->contains($brand)) {
+            $this->brands[] = $brand;
+        }
+
+        return $this;
+    }
+
+    public function removeBrand(Brand $brand): self
+    {
+        if ($this->brands->contains($brand)) {
+            $this->brands->removeElement($brand);
         }
 
         return $this;

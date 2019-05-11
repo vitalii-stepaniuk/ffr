@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Author;
-use App\Form\AuthorType;
+use App\Form\Author1Type;
 use App\Repository\AuthorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ class AuthorController extends AbstractController
     public function new(Request $request): Response
     {
         $author = new Author();
-        $form = $this->createForm(AuthorType::class, $author);
+        $form = $this->createForm(Author1Type::class, $author);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,7 @@ class AuthorController extends AbstractController
      */
     public function edit(Request $request, Author $author): Response
     {
-        $form = $this->createForm(AuthorType::class, $author);
+        $form = $this->createForm(Author1Type::class, $author);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
