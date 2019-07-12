@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Title</th>
+                <th>Type</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -17,7 +18,7 @@
         {% for ingredient in ingredients %}
             <tr>
                 <td>{{ ingredient.id }}</td>
-                <td>{{ ingredient.title }}</td>
+                <td>{{ ingredient.title }}{{ingredient.getIngredientType()}}</td>
                 <td>
                     <a href="{{ path('ingredient_show', {'id': ingredient.id}) }}">show</a>
                     <a href="{{ path('ingredient_edit', {'id': ingredient.id}) }}">edit</a>
